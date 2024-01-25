@@ -1,0 +1,299 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2512
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\froman\fcharset0 Times-Roman;\f2\fnil\fcharset0 Menlo-Regular;
+\f3\fnil\fcharset0 Menlo-Bold;}
+{\colortbl;\red255\green255\blue255;\red255\green255\blue255;\red31\green31\blue36;\red252\green95\blue163;
+\red108\green121\blue134;\red252\green106\blue93;\red65\green161\blue192;\red208\green191\blue105;\red93\green216\blue255;
+}
+{\*\expandedcolortbl;;\csgenericrgb\c100000\c100000\c100000\c85000;\csgenericrgb\c12054\c12284\c14131;\csgenericrgb\c98839\c37355\c63833;
+\csgenericrgb\c42394\c47462\c52518;\csgenericrgb\c98912\c41558\c36568;\csgenericrgb\c25490\c63137\c75294;\csgenericrgb\c81498\c74939\c41233;\csgenericrgb\c36295\c84643\c99897;
+}
+\paperw11900\paperh16840\margl1440\margr1440\vieww15080\viewh14900\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 RE
+\f1 ADME\
+\
+This is a project for an air traffic control simulation with Pthreads. \
+Done by: Tolga Sumer 64534\
+\
+For Part 1 of the project:\
+\
+The simulation uses real-time. \
+There is a single runway that is used both for landing and take-off. \
+There is only one plane on the runway at any time. Implementation is made by locks. \
+After a plane takes off or lands, it can head to any direction. \
+Each plane takes 2t seconds to land or take-off. \
+A plane arrives with probability p at every t seconds. \
+Implementation:\
+\pard\tx593\pardeftab593\pardirnatural\partightenfactor0
+
+\f2 \cf2 \cb3  
+\f3\b \cf4 if
+\f2\b0 \cf2  (rgen <= addProbability) \{\cf5 //landing\cf2 \
+            
+\f3\b \cf4 int
+\f2\b0 \cf2  ID=assignPlaneIndex();\
+            time_t arrival = std::time(
+\f3\b \cf4 NULL
+\f2\b0 \cf2 );\
+            addLandingPlane(
+\f3\b \cf4 new
+\f2\b0 \cf2  Plane(ID,\cf6 "L"\cf2 , arrival, std::time(
+\f3\b \cf4 NULL
+\f2\b0 \cf2 )));\
+            
+\f3\b \cf4 return
+\f2\b0 \cf2  
+\f3\b \cf4 true
+\f2\b0 \cf2 ;\
+        \}
+\f1 \cf0 \cb1 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 A plane besoms ready to depart with probability of 1-p at every t seconds. \
+Implementation:\
+\pard\tx593\pardeftab593\pardirnatural\partightenfactor0
+
+\f3\b \cf4 \cb3 if
+\f2\b0 \cf2 (rgen > addProbability)\{\cf5 //departing\cf2 \
+            
+\f3\b \cf4 int
+\f2\b0 \cf2  ID=assignPlaneIndex();\
+            time_t arrival = std::time(
+\f3\b \cf4 NULL
+\f2\b0 \cf2 );\
+            addDepartingPlane(
+\f3\b \cf4 new
+\f2\b0 \cf2  Plane(ID,\cf6 "D"\cf2 , arrival, std::time(
+\f3\b \cf4 NULL
+\f2\b0 \cf2 )));\
+            
+\f3\b \cf4 return
+\f2\b0 \cf2  
+\f3\b \cf4 true
+\f2\b0 \cf2 ;\
+        \}
+\f1 \cf0 \cb1 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 A plane cannot land without the acknowledgement of the tower. \
+For fuel efficiency, landing planes are prior to departing planes. \
+Command line argument -s indicates the total simulation time. \
+Implementation of time arguments: Pthread_sleep(int seconds) code is used. \
+\
+For Part 2 of the project:\
+The tower favors the landing planes and lets the waiting planes in the air to land until one of the following conditions hold:\
+a- No more planes is waiting to land\
+b-  5 planes of more on the ground are lined up to take off. \
+\pard\tx593\pardeftab593\pardirnatural\partightenfactor0
+\cf0 \
+To avoid the starvation of landing planes waiting too much in the air, I assigned a maxWaitTime which is the 1/3 of the simulation time (s). After the plane in the air waits for at least maxWaitTime seconds, it lands. The wait time is printed every time on the console for the first plane that is waiting to land. \
+Implementation:\
+
+\f3\b \cf4 \cb3 void
+\f2\b0 \cf2  \cf7 towerControl\cf2 () \{\
+        \
+        
+\f3\b \cf4 if
+\f2\b0 \cf2 (runway->getEmergencyPlaneCount() == \cf8 1\cf2 )\{\
+            plane = runway->deleteEmergencyPlane();\
+            printf(\cf6 "Emergency, ID:%d\\n"\cf2 ,plane->planeID);\
+            plane->turnAndGo();\
+        \}\
+        
+\f3\b \cf4 else
+\f2\b0 \cf2  
+\f3\b \cf4 if
+\f2\b0 \cf2 (runway->getLandingPlaneCount() > \cf8 0\cf2 )\{\
+            
+\f3\b \cf4 struct
+\f2\b0 \cf2  \cf9 tm\cf2  aaaaa=*localtime(&runway->landingPlaneQueue.front()->requestTime);\
+            
+\f3\b \cf4 int
+\f2\b0 \cf2  cccc = aaaaa.tm_sec + aaaaa.tm_min*\cf8 60\cf2 ;\
+            time_t now = std::time(
+\f3\b \cf4 NULL
+\f2\b0 \cf2 );\
+            
+\f3\b \cf4 struct
+\f2\b0 \cf2  \cf9 tm\cf2  bbbb=*localtime(&now);\
+            
+\f3\b \cf4 int
+\f2\b0 \cf2  dddd = bbbb.tm_sec + bbbb.tm_min*\cf8 60\cf2 ;\
+            \
+            
+\f3\b \cf4 if
+\f2\b0 \cf2 (runway->getDepartingPlaneCount() < counter)\{ \cf5 // landing is prior to departing\cf2 \
+                            plane = runway->deleteLandingPlane();\
+                            printf(\cf6 "Landing, ID:%d\\n"\cf2 ,plane->planeID);\
+                            plane->turnAndGo();\
+            \} 
+\f3\b \cf4 else
+\f2\b0 \cf2  \{\
+                \
+                \
+            
+\f3\b \cf4 if
+\f2\b0 \cf2 ((dddd - cccc) >= maxWaitTime)\{\
+            \
+            plane = runway->deleteLandingPlane();\
+            printf(\cf6 "Landing, ID:%d\\n"\cf2 ,plane->planeID);\
+            plane->turnAndGo();\
+            \}
+\f3\b \cf4 else
+\f2\b0 \cf2 \{\
+                plane = runway->deleteDepartingPlane();\
+                printf(\cf6 "Departing, ID:%d\\n"\cf2 ,plane->planeID);\
+                   plane->turnAndGo();\
+            \}\
+            \}\
+            printf(\cf6 "Waiting Time of the Landing Plane: %d \\n"\cf2 ,(dddd - cccc));\
+        \}
+\f3\b \cf4 else
+\f2\b0 \cf2 \{\
+            
+\f3\b \cf4 if
+\f2\b0 \cf2 (runway->getDepartingPlaneCount() > \cf8 0\cf2 )\{\
+                plane = runway->deleteDepartingPlane();\
+             printf(\cf6 "Departing, ID:%d\\n"\cf2 ,plane->planeID);\
+                plane->turnAndGo();\
+            \}\
+        \}\
+        \
+    \}
+\f1 \cf0 \cb1 \
+\
+For Part 3 of the project:\
+An emergency plane is added. It comes every 40*t second and gets immediate access to runway. \
+Implementation:\
+
+\f3\b \cf4 \cb3 if
+\f2\b0 \cf2 (a %\cf8 40\cf2  == \cf8 0\cf2  && a > \cf8 0\cf2 )\{\cf5 //emergency\cf2 \
+            
+\f3\b \cf4 int
+\f2\b0 \cf2  ID=assignPlaneIndex();\
+            time_t arrival = std::time(
+\f3\b \cf4 NULL
+\f2\b0 \cf2 );\
+            addEmergencyPlane(
+\f3\b \cf4 new
+\f2\b0 \cf2  Plane(ID,\cf6 "E"\cf2 , arrival, std::time(
+\f3\b \cf4 NULL
+\f2\b0 \cf2 )));\
+            
+\f3\b \cf4 return
+\f2\b0 \cf2  
+\f3\b \cf4 true
+\f2\b0 \cf2 ;\
+        \}
+\f1 \cf0 \cb1 \
+\
+For Keeping Logs:\
+PlaneID, Status, Request Time, Runway Time, Turnaround Time information are showed on a log file. \
+Implementation - it uses real time:\
+
+\f3\b \cf4 \cb3 void
+\f2\b0 \cf2  \cf7 planeData\cf2 (
+\f3\b \cf4 int
+\f2\b0 \cf2  planeID, std::string status, time_t request, time_t runway) \{\
+    
+\f3\b \cf4 if
+\f2\b0 \cf2  (!finishing) \{\
+        std::stringstream planeData;\
+        
+\f3\b \cf4 struct
+\f2\b0 \cf2  \cf9 tm\cf2  requestInfo=*localtime(&request);\
+        
+\f3\b \cf4 struct
+\f2\b0 \cf2  \cf9 tm\cf2  runwayInfo=*localtime(&runway);\
+        planeData << tab << planeID << tab <<tab;\
+        planeData << status << tab << tab;\
+        planeData << intToStr(requestInfo.tm_hour) + \cf6 ":"\cf2  + intToStr(requestInfo.tm_min) + \cf6 ":"\cf2  + intToStr(requestInfo.tm_sec) << tab << tab << tab << tab;\
+        planeData << intToStr(runwayInfo.tm_hour) + \cf6 ":"\cf2  + intToStr(runwayInfo.tm_min) + \cf6 ":"\cf2  + intToStr(runwayInfo.tm_sec) << tab << tab << tab;\
+        planeData << ((
+\f3\b \cf4 int
+\f2\b0 \cf2 )(runway - request));\
+\
+        planeDataMutex.lock();\
+        planeLogStrings->push_back(planeData.str());\
+        planeDataMutex.unlock();\
+    \}\
+\}
+\f1 \cf0 \cb1 \
+\
+Also there is another information shown, which is the At nth second the planeIDs which are on the ground and in the air. Here n is also a command line argument. \
+Implementation:\
+
+\f3\b \cf4 \cb3 void
+\f2\b0 \cf2  \cf7 groundOrAir\cf2 () \{\
+        
+\f3\b \cf4 if
+\f2\b0 \cf2  (a > n)\{\
+            printf(\cf6 "At %d sec ground: "\cf2 , a);\
+            
+\f3\b \cf4 for
+\f2\b0 \cf2 (Plane* plane : runway->departingPlaneQueue)\{\
+                printf(\cf6 "%d "\cf2 ,plane->planeID);\
+            \}\
+            printf(\cf6 "\\nAt %d sec air:"\cf2 , a);\
+            
+\f3\b \cf4 for
+\f2\b0 \cf2 (Plane* plane : runway->landingPlaneQueue)\{\
+                printf(\cf6 "%d "\cf2 ,plane->planeID);\
+            \}\
+            printf(\cf6 "\\n"\cf2 );\
+        \}\
+    \}\
+
+\f1 \cf0 \cb1 \
+The command line arguments are taken by parsing;\
+
+\f3\b \cf4 \cb3 void
+\f2\b0 \cf2  \cf7 parseArgs\cf2 (
+\f3\b \cf4 int
+\f2\b0 \cf2  argc, 
+\f3\b \cf4 char
+\f2\b0 \cf2 ** argv) \{\
+    
+\f3\b \cf4 for
+\f2\b0 \cf2  (
+\f3\b \cf4 int
+\f2\b0 \cf2  i = \cf8 1\cf2 ; i < argc; ++i) \{\
+        std::string examined = std::string(argv[i]);\
+        std::string searched = examined.substr(\cf8 0\cf2 , \cf8 2\cf2 );\
+        
+\f3\b \cf4 if
+\f2\b0 \cf2  (searched.compare(\cf6 "s="\cf2 )==\cf8 0\cf2 ) \{\
+            s = std::stoi(examined.substr(\cf8 2\cf2 , examined.length()));\
+            dn(\cf6 "set s to "\cf2  + intToStr(s));\
+        \}\
+        
+\f3\b \cf4 if
+\f2\b0 \cf2  (searched.compare(\cf6 "p="\cf2 )==\cf8 0\cf2 ) \{\
+            p = std::stod(examined.substr(\cf8 2\cf2 , examined.length()));\
+            dn(\cf6 "set p to "\cf2  + intToStr(p));\
+        \}\
+        
+\f3\b \cf4 if
+\f2\b0 \cf2  (searched.compare(\cf6 "t="\cf2 )==\cf8 0\cf2 ) \{\
+            t = std::stoi(examined.substr(\cf8 2\cf2 , examined.length()));\
+            dn(\cf6 "set t to "\cf2  + intToStr(t));\
+        \}\
+        
+\f3\b \cf4 if
+\f2\b0 \cf2  (searched.compare(\cf6 "n="\cf2 )==\cf8 0\cf2 ) \{\
+            t = std::stoi(examined.substr(\cf8 2\cf2 , examined.length()));\
+            dn(\cf6 "set n to "\cf2  + intToStr(t));\
+        \}\
+    \}\
+    \
+\}
+\f1 \cf0 \cb1 \
+\
+Some notes on the implementation:\
+Probability of planes is generated by random number generator. \
+Every type of plane has its own queue. S\
+Each plane is represented by a thread. \
+The tower has its own thread. \
+Also I added a seed for debugging purposes in the code - not in the command line arguments. \
+\
+\
+}

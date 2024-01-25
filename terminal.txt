@@ -1,0 +1,176 @@
+At 1 sec ground: 1 
+At 1 sec air: 2 
+Landing, ID:2
+Waiting Time of the Landing Plane: 1 
+At 2 sec ground: 1 3 
+At 2 sec air: 
+At 3 sec ground: 1 3 4 
+At 3 sec air: 
+Departing, ID:1
+At 4 sec ground: 3 4 5 
+At 4 sec air: 
+At 5 sec ground: 3 4 5 6 
+At 5 sec air: 
+Landing, ID:7
+Waiting Time of the Landing Plane: 0 
+At 6 sec ground: 3 4 5 6 
+At 6 sec air: 
+At 7 sec ground: 3 4 5 6 8 
+At 7 sec air: 
+Departing, ID:3
+Waiting Time of the Landing Plane: 0 
+At 8 sec ground: 4 5 6 8 
+At 8 sec air: 9 
+At 9 sec ground: 4 5 6 8 10 
+At 9 sec air: 9 
+Departing, ID:4
+Waiting Time of the Landing Plane: 2 
+At 10 sec ground: 5 6 8 10 11 
+At 10 sec air: 9 
+At 11 sec ground: 5 6 8 10 11 12 
+At 11 sec air: 9 
+Departing, ID:5
+Waiting Time of the Landing Plane: 4 
+At 12 sec ground: 6 8 10 11 12 13 
+At 12 sec air: 9 
+At 13 sec ground: 6 8 10 11 12 13 14 
+At 13 sec air: 9 
+Departing, ID:6
+Waiting Time of the Landing Plane: 6 
+At 14 sec ground: 8 10 11 12 13 14 15 
+At 14 sec air: 9 
+At 15 sec ground: 8 10 11 12 13 14 15 16 
+At 15 sec air: 9 
+Departing, ID:8
+Waiting Time of the Landing Plane: 8 
+At 16 sec ground: 10 11 12 13 14 15 16 17 
+At 16 sec air: 9 
+At 17 sec ground: 10 11 12 13 14 15 16 17 
+At 17 sec air: 9 18 
+Departing, ID:10
+Waiting Time of the Landing Plane: 10 
+At 18 sec ground: 11 12 13 14 15 16 17 
+At 18 sec air: 9 18 19 
+At 19 sec ground: 11 12 13 14 15 16 17 
+At 19 sec air: 9 18 19 20 
+Departing, ID:11
+Waiting Time of the Landing Plane: 12 
+At 20 sec ground: 12 13 14 15 16 17 
+At 20 sec air: 9 18 19 20 21 
+At 21 sec ground: 12 13 14 15 16 17 22 
+At 21 sec air: 9 18 19 20 21 
+Departing, ID:12
+Waiting Time of the Landing Plane: 14 
+At 22 sec ground: 13 14 15 16 17 22 
+At 22 sec air: 9 18 19 20 21 23 
+At 23 sec ground: 13 14 15 16 17 22 
+At 23 sec air: 9 18 19 20 21 23 24 
+Departing, ID:13
+Waiting Time of the Landing Plane: 16 
+At 24 sec ground: 14 15 16 17 22 25 
+At 24 sec air: 9 18 19 20 21 23 24 
+At 25 sec ground: 14 15 16 17 22 25 26 
+At 25 sec air: 9 18 19 20 21 23 24 
+Departing, ID:14
+Waiting Time of the Landing Plane: 18 
+At 26 sec ground: 15 16 17 22 25 26 27 
+At 26 sec air: 9 18 19 20 21 23 24 
+At 27 sec ground: 15 16 17 22 25 26 27 
+At 27 sec air: 9 18 19 20 21 23 24 28 
+Landing, ID:9
+Waiting Time of the Landing Plane: 20 
+At 28 sec ground: 15 16 17 22 25 26 27 
+At 28 sec air: 18 19 20 21 23 24 28 29 
+At 29 sec ground: 15 16 17 22 25 26 27 
+At 29 sec air: 18 19 20 21 23 24 28 29 30 
+Departing, ID:15
+Waiting Time of the Landing Plane: 13 
+At 30 sec ground: 16 17 22 25 26 27 31 
+At 30 sec air: 18 19 20 21 23 24 28 29 30 
+At 31 sec ground: 16 17 22 25 26 27 31 
+At 31 sec air: 18 19 20 21 23 24 28 29 30 32 
+Departing, ID:16
+Waiting Time of the Landing Plane: 15 
+At 32 sec ground: 17 22 25 26 27 31 33 
+At 32 sec air: 18 19 20 21 23 24 28 29 30 32 
+At 33 sec ground: 17 22 25 26 27 31 33 
+At 33 sec air: 18 19 20 21 23 24 28 29 30 32 34 
+Departing, ID:17
+Waiting Time of the Landing Plane: 17 
+At 34 sec ground: 22 25 26 27 31 33 35 
+At 34 sec air: 18 19 20 21 23 24 28 29 30 32 34 
+At 35 sec ground: 22 25 26 27 31 33 35 
+At 35 sec air: 18 19 20 21 23 24 28 29 30 32 34 36 
+Departing, ID:22
+Waiting Time of the Landing Plane: 19 
+At 36 sec ground: 25 26 27 31 33 35 37 
+At 36 sec air: 18 19 20 21 23 24 28 29 30 32 34 36 
+At 37 sec ground: 25 26 27 31 33 35 37 38 
+At 37 sec air: 18 19 20 21 23 24 28 29 30 32 34 36 
+Landing, ID:18
+Waiting Time of the Landing Plane: 21 
+At 38 sec ground: 25 26 27 31 33 35 37 38 
+At 38 sec air: 19 20 21 23 24 28 29 30 32 34 36 39 
+At 39 sec ground: 25 26 27 31 33 35 37 38 
+At 39 sec air: 19 20 21 23 24 28 29 30 32 34 36 39 40 
+Emergency, ID:41
+At 40 sec ground: 25 26 27 31 33 35 37 38 
+At 40 sec air: 19 20 21 23 24 28 29 30 32 34 36 39 40 
+At 41 sec ground: 25 26 27 31 33 35 37 38 
+At 41 sec air: 19 20 21 23 24 28 29 30 32 34 36 39 40 42 
+Landing, ID:19
+Waiting Time of the Landing Plane: 24 
+At 42 sec ground: 25 26 27 31 33 35 37 38 
+At 42 sec air: 20 21 23 24 28 29 30 32 34 36 39 40 42 43 
+At 43 sec ground: 25 26 27 31 33 35 37 38 44 
+At 43 sec air: 20 21 23 24 28 29 30 32 34 36 39 40 42 43 
+Landing, ID:20
+Waiting Time of the Landing Plane: 25 
+At 44 sec ground: 25 26 27 31 33 35 37 38 44 45 
+At 44 sec air: 21 23 24 28 29 30 32 34 36 39 40 42 43 
+At 45 sec ground: 25 26 27 31 33 35 37 38 44 45 
+At 45 sec air: 21 23 24 28 29 30 32 34 36 39 40 42 43 46 
+Landing, ID:21
+Waiting Time of the Landing Plane: 26 
+At 46 sec ground: 25 26 27 31 33 35 37 38 44 45 47 
+At 46 sec air: 23 24 28 29 30 32 34 36 39 40 42 43 46 
+At 47 sec ground: 25 26 27 31 33 35 37 38 44 45 47 48 
+At 47 sec air: 23 24 28 29 30 32 34 36 39 40 42 43 46 
+Landing, ID:23
+Waiting Time of the Landing Plane: 26 
+At 48 sec ground: 25 26 27 31 33 35 37 38 44 45 47 48 49 
+At 48 sec air: 24 28 29 30 32 34 36 39 40 42 43 46 
+At 49 sec ground: 25 26 27 31 33 35 37 38 44 45 47 48 49 50 
+At 49 sec air: 24 28 29 30 32 34 36 39 40 42 43 46 
+Landing, ID:24
+Waiting Time of the Landing Plane: 27 
+At 50 sec ground: 25 26 27 31 33 35 37 38 44 45 47 48 49 50 
+At 50 sec air: 28 29 30 32 34 36 39 40 42 43 46 51 
+At 51 sec ground: 25 26 27 31 33 35 37 38 44 45 47 48 49 50 52 
+At 51 sec air: 28 29 30 32 34 36 39 40 42 43 46 51 
+Landing, ID:28
+Waiting Time of the Landing Plane: 25 
+At 52 sec ground: 25 26 27 31 33 35 37 38 44 45 47 48 49 50 52 53 
+At 52 sec air: 29 30 32 34 36 39 40 42 43 46 51 
+At 53 sec ground: 25 26 27 31 33 35 37 38 44 45 47 48 49 50 52 53 54 
+At 53 sec air: 29 30 32 34 36 39 40 42 43 46 51 
+Landing, ID:29
+Waiting Time of the Landing Plane: 26 
+At 54 sec ground: 25 26 27 31 33 35 37 38 44 45 47 48 49 50 52 53 54 55 
+At 54 sec air: 30 32 34 36 39 40 42 43 46 51 
+At 55 sec ground: 25 26 27 31 33 35 37 38 44 45 47 48 49 50 52 53 54 55 
+At 55 sec air: 30 32 34 36 39 40 42 43 46 51 56 
+Landing, ID:30
+Waiting Time of the Landing Plane: 27 
+At 56 sec ground: 25 26 27 31 33 35 37 38 44 45 47 48 49 50 52 53 54 55 
+At 56 sec air: 32 34 36 39 40 42 43 46 51 56 57 
+At 57 sec ground: 25 26 27 31 33 35 37 38 44 45 47 48 49 50 52 53 54 55 58 
+At 57 sec air: 32 34 36 39 40 42 43 46 51 56 57 
+Landing, ID:32
+Waiting Time of the Landing Plane: 27 
+At 58 sec ground: 25 26 27 31 33 35 37 38 44 45 47 48 49 50 52 53 54 55 58 
+At 58 sec air: 34 36 39 40 42 43 46 51 56 57 59 
+At 59 sec ground: 25 26 27 31 33 35 37 38 44 45 47 48 49 50 52 53 54 55 58 60 
+At 59 sec air: 34 36 39 40 42 43 46 51 56 57 59 
+Landing, ID:34
+Waiting Time of the Landing Plane: 27 
